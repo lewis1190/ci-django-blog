@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG') if os.path.isfile('env.py') else False
+DEBUG = True if os.path.isfile('env.py') and os.environ.get('DEBUG') == 'True' else False
 
 ALLOWED_HOSTS = [
     '.herokuapp.com',
@@ -90,6 +90,8 @@ WSGI_APPLICATION = 'codestar.wsgi.application'
 #     }
 # }
 
+url = os.environ.get("DATABASE_URL")
+print("DATABASE_URL:", url)
 DATABASES = {
     'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
