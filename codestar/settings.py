@@ -12,10 +12,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+from django.contrib.messages import constants as messages
 import dj_database_url
 
 if os.path.isfile('env.py'):
-    print('Found env.py file, importing...')
     import env
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -111,7 +111,6 @@ WSGI_APPLICATION = 'codestar.wsgi.application'
 # }
 
 url = os.environ.get("DATABASE_URL")
-print("DATABASE_URL:", url)
 DATABASES = {
     'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
@@ -152,6 +151,11 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+MESSAGE_TAGS = {
+    messages.SUCCESS: 'alert-success',
+    messages.ERROR: 'alert-danger',
+}
 
 
 # Static files (CSS, JavaScript, Images)
